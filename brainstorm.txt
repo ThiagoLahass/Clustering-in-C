@@ -6,3 +6,22 @@ usar getline e strtok pra leitura dos dados
 vai ser forçada a alocação dinâmica
 
 utilizar qsort para ordenar os pares de distâncias dos pontos
+
+-------------------------------------------
+novo id para para o Ponto para fazer o algoritmo
+
+tipo aresta {
+	ponto* p1
+	ponto* p2
+	double dist
+	bool disUsada
+}
+
+grupo {
+	pontos**
+	id
+}
+
+não fazer as últimas k conexoes
+	já vai ter os k grupos porntos (k id's diferentes no vetor)
+	
