@@ -1,0 +1,8 @@
+Giovanni disse que é pra fazer usando vetor ou lista mesmo*
+  sem inventar moda
+  até porque o algorítimo de union-find é executado emcima dessas estruturas
+
+usar getline e strtok pra leitura dos dados
+vai ser forçada a alocação dinâmica
+
+utilizar qsort para ordenar os pares de distâncias dos pontos
