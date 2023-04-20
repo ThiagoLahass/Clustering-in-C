@@ -35,12 +35,10 @@ int main(int argc, char** argv) {
 
   /*======== Aplicando o algorítmo ========*/
   int qtdGrupos = atoi(argv[2]);
-
   if (qtdGrupos > qtdPontos) {
     printf("O número de grupos não pode ser maior que a quantidade de pontos!\n");
     exit(1);
   }
-
   UnionTree* componentesConexas = inicializaUnionTree(qtdPontos);
   conectaArestas(arestas, componentesConexas, qtdPontos, qtdArestas, qtdGrupos);
 
