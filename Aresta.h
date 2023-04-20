@@ -3,8 +3,7 @@
 
 #include "Ponto.h"
 #include "Matriz.h"
-#include "union-find.h"
-#include <stdbool.h>
+#include "UnionTree.h"
 
 typedef struct aresta Aresta;
 
@@ -18,8 +17,6 @@ void destroiAresta(Aresta* a);
 Ponto* getPonto1(Aresta* a);
 Ponto* getPonto2(Aresta* a);
 double getDistancia(Aresta* a);
-bool getDistFoiUsada(Aresta* a);
-void setDistFoiUsada(Aresta* a, bool distFoiUsada);
 void conectaArestas(Aresta** arestas, UnionTree* t, int qtdPontos, int qtdArestas, int k);
 
 #endif // !ARESTA_H

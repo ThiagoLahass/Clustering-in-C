@@ -4,7 +4,6 @@ struct aresta { // Conexão entre dois pontos
   Ponto* p1;
   Ponto* p2;
   double distancia; // Distância entre p1 e p2
-  bool distFoiUsada; // Pra saber se a distância foi usada no algoritmo de Kruskal
 };
 
 /* Função que será passada ao qsort */
@@ -22,7 +21,6 @@ Aresta* inicializaAresta(Ponto *p1, Ponto *p2, double distancia) {
   a->p1 = p1;
   a->p2 = p2;
   a->distancia = distancia;
-  a->distFoiUsada = false;
   return a;
 }
 
@@ -68,10 +66,6 @@ Ponto* getPonto1(Aresta *a) { return a->p1; }
 Ponto* getPonto2(Aresta *a) { return a->p2; }
 
 double getDistancia(Aresta *a) { return a->distancia; }
-
-bool getDistFoiUsada(Aresta *a) { return a->distFoiUsada; }
-
-void setDistFoiUsada(Aresta *a, bool distFoiUsada) { a->distFoiUsada = distFoiUsada; }
 
 void conectaArestas(Aresta** arestas, UnionTree* t, int qtdPontos, int qtdArestas, int k){
   register int i = 0;
