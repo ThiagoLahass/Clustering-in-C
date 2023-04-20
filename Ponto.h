@@ -7,19 +7,22 @@
 #include <math.h>
 #include <unistd.h>
 
-#define NUM_INICIAL_DIMENSOES 10
 #define DELIMITADOR ","
 
 typedef struct ponto Ponto;
 
 Ponto** lePontos(char* nomeArquivoEntrada);
-Ponto* inicializaPonto(char* linha);
-void imprimePontos(Ponto** pontos);
+Ponto* inicializaPonto(char* linha, int qtdDimensoes, int identificadorPonto);
+void imprimePonto(Ponto* p, FILE* arquivoSaida);
+void imprimePontos(Ponto **pontos, FILE* arquivoSaida);
+void destroiPonto(Ponto* p);
 void destroiPontos(Ponto** pontos);
 double calculaDistanciaEntrePontos(Ponto* x, Ponto* y);
 int getQtdDimensoes(Ponto* p);
 void setQtdDimensoes(Ponto* p, int qtdDimensoes);
-char* getId(Ponto* p);
-int* getCoordenadas(Ponto* p);
+char* getNome(Ponto* p);
+int getId(Ponto* p);
+double* getCoordenadas(Ponto* p);
+int getQuantidadePontos(Ponto** p);
 
 #endif // !PONTO_H

@@ -1,27 +1,31 @@
-Giovanni disse que é pra fazer usando vetor ou lista mesmo*
+[x] Giovanni disse que é pra fazer usando vetor ou lista mesmo*
   sem inventar moda
   até porque o algorítimo de union-find é executado emcima dessas estruturas
 
-usar getline e strtok pra leitura dos dados
-vai ser forçada a alocação dinâmica
+[x] usar getline e strtok pra leitura dos dados
 
-utilizar qsort para ordenar os pares de distâncias dos pontos
+[x] vai ser forçada a alocação dinâmica
 
--------------------------------------------
-novo id para para o Ponto para fazer o algoritmo
+[x] novo id para para o Ponto para fazer o algoritmo
 
-tipo aresta {
+[x] tipo aresta {
 	ponto* p1
 	ponto* p2
 	double dist
 	bool disUsada
 }
 
-grupo {
+[x] grupo {
 	pontos**
-	id
+	quantidade de pontos
 }
 
-não fazer as últimas k conexoes
-	já vai ter os k grupos porntos (k id's diferentes no vetor)
+[] trocar o método de ordenação dos grupos
+
+[x] vetor do tipo aresta pra armazenar e ordenar as distâncias
+
+[x] utilizar qsort para ordenar os pares de distâncias dos pontos
+
+[x] não fazer as últimas k conexoes
+	já vai ter os k grupos prontos (k id's diferentes no vetor)
 	

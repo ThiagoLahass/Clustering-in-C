@@ -1,9 +1,10 @@
 #include "Ponto.h"
 
 struct ponto {
-    char* id;
-    int* coordenadas;
+    char* nome;
+    double* coordenadas;
     int qtdDimensoes;
+    int id; // Onde vai ser aplicado o algoritmo
 };
 
 Ponto** lePontos(char* nomeArquivoEntrada) {
@@ -13,80 +14,100 @@ Ponto** lePontos(char* nomeArquivoEntrada) {
         exit(1);
     }
 
-    /* Descobrir quantas linhas (n° de pontos) tem o arquivo */
-    int qtdLinhas = 0;
-    while (!feof(arquivoDeEntrada)) {
-        fscanf(arquivoDeEntrada, "%*[^\n]"); // Lê até o final da linha
-        fscanf(arquivoDeEntrada, "%*c"); // Lê o caractere de nova linha
-        qtdLinhas++;
+    /*======== Descobrir quantas dimensões tem o ponto =========*/
+    int qtdDimensoes = -1; // Inicializa com -1 para desconsiderar o nome do ponto
+    char* linha = NULL; // Auxiliar para ler a linha
+    size_t tamLinha = 0; // Auxiliar para ler a linha
+    getline(&linha, &tamLinha, arquivoDeEntrada); // Ler a primeira linha pra ver quantas dimensões tem
+
+    char* token;
+    const char delimitador[] = DELIMITADOR;
+
+    token = strtok(linha, delimitador); // Divide a linha em tokens separados pelo delimitador
+    while (token != NULL) {
+        qtdDimensoes++;
+        token = strtok(NULL, delimitador); // Passa para o próximo token
     }
+    
+    free(linha); // Alocado pelo getline()
     fseek(arquivoDeEntrada, 0, SEEK_SET); // Voltar o ponteiro do arquivo para o início
 
 
-    Ponto** pontos = (Ponto**) malloc(sizeof(Ponto*) * qtdLinhas); // Aloca um vetor de pontos
-    char* linha = NULL; // auxiliar para ler a linha
-    size_t tamLinha = 0;
+    /*======== Leitura dos pontos de fato =========*/
+    int qtdPontos = 1000; // Chute da quantidade inicial de pontos
+    Ponto** pontos = (Ponto**) malloc(sizeof(Ponto*) * qtdPontos); // Aloca um vetor de pontos
+    linha = NULL; // Reset 
+    tamLinha = 0; // Reset
 
-    /* Lê os pontos */
-    int qtdPontosLidos = 0; // Conta quantos pontos já foram lidos
+    int qtdPontosLidos = 0; 
     while (getline(&linha, &tamLinha, arquivoDeEntrada) > 0) {
-        pontos[qtdPontosLidos] = inicializaPonto(linha);
+        if (qtdPontosLidos == qtdPontos) { // Se o vetor de pontos estiver cheio, realoca o vetor
+            pontos = (Ponto**) realloc(pontos, sizeof(Ponto*) * qtdPontos * 2);
+            qtdPontos *= 2;
+        }
+        pontos[qtdPontosLidos] = inicializaPonto(linha, qtdDimensoes, qtdPontosLidos);
         qtdPontosLidos++;
     }
+    /* Se o vetor tiver espaços vazios, tira esses espaços */
+    if (qtdPontosLidos+1 < qtdPontos) { // +1 porque o último elemento é NULL
+        pontos = (Ponto**) realloc(pontos, sizeof(Ponto*) * (qtdPontosLidos+1));
+    }
+    pontos[qtdPontosLidos] = NULL; // Marca o fim do vetor de pontos
 
     free(linha); // Alocado pelo getline()
     fclose(arquivoDeEntrada);
     return pontos;
 }
 
-Ponto* inicializaPonto(char* linha) {
+Ponto* inicializaPonto(char* linha, int qtdDimensoes, int identificadorPonto) {
     Ponto* ponto = (Ponto*) malloc(sizeof(Ponto));
-    ponto->coordenadas = (int*) malloc(sizeof(int) * NUM_INICIAL_DIMENSOES);
+    ponto->coordenadas = (double*) malloc(sizeof(double) * qtdDimensoes);
+    ponto->qtdDimensoes = qtdDimensoes;
+    ponto->id = identificadorPonto;
 
+    /*======== Pegando os dados da linha ========*/
     char* token;
     const char delimitador[] = DELIMITADOR;
 
-    token = strtok(linha, delimitador);
-    ponto->id = strdup(token);
+    token = strtok(linha, delimitador); // Divide a linha em tokens separados pelo delimitador
+    ponto->nome = strdup(token);
 
     int idxCoordenada = 0;
-    token = strtok(NULL, delimitador);
+    token = strtok(NULL, delimitador); // Passa para o próximo token
     while (token != NULL) {
-        if (idxCoordenada == NUM_INICIAL_DIMENSOES) {
-            ponto->coordenadas = (int*) realloc(ponto->coordenadas, sizeof(int) * NUM_INICIAL_DIMENSOES * 2);
-            // NUM_INICIAL_DIMENSOES *= 2;
-        } 
-        ponto->coordenadas[idxCoordenada] = atoi(token);
+        ponto->coordenadas[idxCoordenada] = strtod(token, NULL); // Converte a string para double
         idxCoordenada++;
-        token = strtok(NULL, delimitador);
+        token = strtok(NULL, delimitador); // Passa para o próximo token 
     }
-
-    ponto->qtdDimensoes = idxCoordenada;
 
     return ponto;
 }
 
-// FIXME: Invalid read of size 8
-// Address 0x4bab2f0 is 0 bytes after a block of size 80 alloc'd
-void imprimePontos(Ponto** pontos) {
-    int i = 0;
-    while (pontos[i] != NULL) {
-        printf("%s", pontos[i]->id);
-        int j = 0;
-        for (j = 0; j < pontos[i]->qtdDimensoes; j++) {
-            printf(",%d", pontos[i]->coordenadas[j]);
-        }
-        printf("\n");
-        i++;
+void imprimePonto(Ponto* p, FILE* arquivoSaida) { fprintf(arquivoSaida, "%s", p->nome); }
+
+void imprimePontos(Ponto **pontos, FILE* arquivoSaida) {
+  int i = 0;
+  while (pontos[i] != NULL) {
+    fprintf(arquivoSaida, "%s", pontos[i]->nome);
+    int j = 0;
+    for (j = 0; j < pontos[i]->qtdDimensoes; j++) {
+      fprintf(arquivoSaida, ",%.20lf", pontos[i]->coordenadas[j]);
     }
+    fprintf(arquivoSaida, "\n");
+    i++;
+  }
 }
 
-// FIXME: Invalid read of size 8
-// Address 0x4bab2f0 is 0 bytes after a block of size 80 alloc'd
+void destroiPonto(Ponto* p) {
+    free(p->nome);
+    free(p->coordenadas);
+    free(p);
+}
+
 void destroiPontos(Ponto **pontos) {
     int i = 0;
     while (pontos[i] != NULL) {
-        free(pontos[i]->id);
+        free(pontos[i]->nome);
         free(pontos[i]->coordenadas);
         free(pontos[i]);
         i++;
@@ -108,6 +129,14 @@ int getQtdDimensoes(Ponto* p) { return p->qtdDimensoes; }
 
 void setQtdDimensoes(Ponto* p, int qtdDimensoes) { p->qtdDimensoes = qtdDimensoes; }
 
-char* getId(Ponto* p) { return p->id; }
+char* getNome(Ponto* p) { return p->nome; }
 
-int* getCoordenadas(Ponto* p) { return p->coordenadas; }
+int getId(Ponto* p) { return p->id; }
+
+double* getCoordenadas(Ponto* p) { return p->coordenadas; }
+
+int getQuantidadePontos(Ponto** p) {
+    int i = 0;
+    while (p[i] !=  NULL) { i++; }
+    return i;
+}
