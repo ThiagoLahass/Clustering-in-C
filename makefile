@@ -32,7 +32,7 @@ aresta: matriz union
 	@ gcc -c Aresta.c
 
 union: ponto
-	@ gcc -c union-find.c
+	@ gcc -c UnionTree.c
 
 grupo: ponto
 	@ gcc -c Grupo.c

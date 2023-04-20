@@ -1,4 +1,4 @@
-#include "union-find.h"
+#include "UnionTree.h"
 
 struct unionTree {
     int* tree;

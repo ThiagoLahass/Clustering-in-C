@@ -1,7 +1,7 @@
 #include "Ponto.h"
 #include "Matriz.h"
 #include "Aresta.h"
-#include "union-find.h"
+#include "UnionTree.h"
 #include "Grupo.h"
 
 int main(int argc, char** argv) {

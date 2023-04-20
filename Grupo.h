@@ -2,7 +2,7 @@
 #define GRUPO_H
 
 #include "Ponto.h"
-#include "union-find.h"
+#include "UnionTree.h"
 
 typedef struct grupo Grupo;
 
