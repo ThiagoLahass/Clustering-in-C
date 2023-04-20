@@ -48,9 +48,9 @@ Ponto** lePontos(char* nomeArquivoEntrada) {
         pontos[qtdPontosLidos] = inicializaPonto(linha, qtdDimensoes, qtdPontosLidos);
         qtdPontosLidos++;
     }
-    /* Se o vetor tiver espaços vazios, tira esses espaços */
-    if (qtdPontosLidos+1 < qtdPontos) { // +1 porque o último elemento é NULL
-        pontos = (Ponto**) realloc(pontos, sizeof(Ponto*) * (qtdPontosLidos+1));
+    /* Se sobrou espaço no vetor ou deu a conta exata */
+    if (qtdPontosLidos + 1 < qtdPontos || qtdPontosLidos == qtdPontos) {
+        pontos = (Ponto**) realloc(pontos, sizeof(Ponto*) * (qtdPontosLidos + 1));
     }
     pontos[qtdPontosLidos] = NULL; // Marca o fim do vetor de pontos
 
