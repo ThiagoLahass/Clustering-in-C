@@ -79,6 +79,8 @@ void conectaArestas(Aresta** arestas, UnionTree* t, int qtdPontos, int qtdAresta
   int numConexoes = qtdPontos - k;
   int numConexoesAtual = 0;
 
+  if (numConexoes == 0) return; // Caso em que o número de pontos é igual ao de grupos desejados
+
   for (i = 0; i < qtdArestas; i++) {
     p1 = getPonto1(arestas[i]);
     p2 = getPonto2(arestas[i]);
