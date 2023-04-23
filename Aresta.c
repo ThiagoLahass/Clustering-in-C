@@ -29,15 +29,18 @@ Aresta** inicializaVetorArestas(int qtdArestas){
   return a;
 }
 
-void preencheVetorArestas(Aresta** arestas, Matriz* distancias, Ponto** pontos){
+void preencheVetorArestas(Aresta** arestas, int qtdPontos, Ponto** pontos){
   register int i = 0, j = 0, idx = 0;
-  int tamanhoMatriz = get_TamanhoMatriz(distancias);
+  register double distAtual;
+  
 
-  for (i = 0; i < tamanhoMatriz; i++) {
-    for (j = 0; j < tamanhoMatriz; j++) {
+  for (i = 0; i < qtdPontos; i++) {
+    for (j = 0; j < qtdPontos; j++) {
       if (i > j){
+        distAtual  = calculaDistanciaEntrePontos(pontos[i], pontos[j]);
         /* Mapeia cada entrada da matriz para uma posição única do vetor de arestas */
-        arestas[idx] = inicializaAresta(pontos[i], pontos[j], getConteudoMatriz(distancias, i, j));
+
+        arestas[idx] = inicializaAresta(pontos[i], pontos[j], distAtual);
         idx++;
       }
       else break;

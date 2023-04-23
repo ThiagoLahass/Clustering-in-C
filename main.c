@@ -1,5 +1,4 @@
 #include "Ponto.h"
-#include "Matriz.h"
 #include "Aresta.h"
 #include "UnionTree.h"
 #include "Grupo.h"
@@ -22,24 +21,27 @@ int main(int argc, char** argv) {
   Ponto** pontos = lePontos(argv[1]); // Vetor com todos os pontos
 
   /*======== Tratando os dados ========*/
-  int qtdPontos = getQuantidadePontos(pontos); // Obtem quantidade final de pontos
+  int qtdPontos = getQuantidadePontos(pontos); // Obtem quantidade de pontos
 
-  // Cria e preenche a matriz com as distancias entre os pontos
-  Matriz* distancias = inicializaMatriz(qtdPontos);
-  int qtdArestas = preencheMatriz(distancias, pontos);
+  // obtem o numero de arestas necessarias
+  int qtdArestas = qtdPontos * (qtdPontos -1) / 2;
 
   /* Aresta: conexão entre dois pontos */
   Aresta** arestas = inicializaVetorArestas(qtdArestas); 
-  preencheVetorArestas(arestas, distancias, pontos);
-  qsort(arestas, qtdArestas, sizeof(Aresta*), compareArestas); // Ordena o vetor de arestas
+  //preenche as arestas com as disntacias entre os pares de pontos unicos
+  preencheVetorArestas(arestas, qtdPontos, pontos);
+  // Ordena o vetor de arestas
+  qsort(arestas, qtdArestas, sizeof(Aresta*), compareArestas); 
 
-  /*======== Aplicando o algorítmo ========*/
+  /*======== Aplicando o algoritmo ========*/
   int qtdGrupos = atoi(argv[2]);
   if (qtdGrupos > qtdPontos) {
     printf("O número de grupos não pode ser maior que a quantidade de pontos!\n");
     exit(1);
   }
+
   UnionTree* componentesConexas = inicializaUnionTree(qtdPontos);
+  //utiliza o problema de union-find para conectar os pontos em grupos
   conectaArestas(arestas, componentesConexas, qtdPontos, qtdArestas, qtdGrupos);
 
   /*======== Criando os grupos de pontos ========*/
@@ -58,7 +60,6 @@ int main(int argc, char** argv) {
 
   /*======== Liberando toda a memória alocada ========*/
   destroiPontos(pontos);
-  destroiMatriz(distancias);
   destroiVetorArestas(arestas, qtdArestas);
   destroiUnionTree(componentesConexas);
   destroiGrupos(gruposPontos, qtdGrupos);

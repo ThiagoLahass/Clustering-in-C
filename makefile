@@ -18,17 +18,14 @@ QTD_GRUPOS=3 # Caso de teste qualquer
 
 all: clean compile runAll valAll
 
-compile: ponto matriz aresta union grupo
+compile: ponto aresta union grupo
 	@ gcc -o trab1 *.o main.c -lm 
 # -lm é usado para linkar a biblioteca math.h
 
 ponto:
 	@ gcc -c Ponto.c
 
-matriz:
-	@ gcc -c Matriz.c
-
-aresta: matriz union
+aresta: union
 	@ gcc -c Aresta.c
 
 union: ponto

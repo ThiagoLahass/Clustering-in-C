@@ -2,7 +2,6 @@
 #define ARESTA_H
 
 #include "Ponto.h"
-#include "Matriz.h"
 #include "UnionTree.h"
 
 typedef struct aresta Aresta;
@@ -10,7 +9,7 @@ typedef struct aresta Aresta;
 int compareArestas(const void* arg1, const void* arg2);
 Aresta* inicializaAresta(Ponto* p1, Ponto* p2, double distancia);
 Aresta** inicializaVetorArestas(int tamanho);
-void preencheVetorArestas(Aresta** arestas, Matriz* distancias, Ponto** pontos);
+void preencheVetorArestas(Aresta** arestas, int qtdPontos, Ponto** pontos);
 void imprimeVetorArestas(Aresta** a, int tamanho);
 void destroiVetorArestas(Aresta** a, int tamanho);
 void destroiAresta(Aresta* a);

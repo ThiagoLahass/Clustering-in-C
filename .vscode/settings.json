@@ -1,10 +1,12 @@
 {
   "files.associations": {
+    "*.csv": "dynamic csv",
     ".sequelizerc": "javascript",
     ".stylelintrc": "json",
     "*.tsx": "typescriptreact",
     ".env.*": "dotenv",
     ".prettierrc": "json",
-    "aresta.h": "c"
+    "aresta.h": "c",
+    "uniontree.h": "c"
   }
 }
