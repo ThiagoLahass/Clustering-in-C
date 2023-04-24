@@ -38,8 +38,6 @@ void preencheVetorArestas(Aresta** arestas, int qtdPontos, Ponto** pontos){
     for (j = 0; j < qtdPontos; j++) {
       if (i > j){
         distAtual  = calculaDistanciaEntrePontos(pontos[i], pontos[j]);
-        /* Mapeia cada entrada da matriz para uma posição única do vetor de arestas */
-
         arestas[idx] = inicializaAresta(pontos[i], pontos[j], distAtual);
         idx++;
       }

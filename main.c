@@ -28,10 +28,9 @@ int main(int argc, char** argv) {
 
   /* Aresta: conexão entre dois pontos */
   Aresta** arestas = inicializaVetorArestas(qtdArestas); 
-  //preenche as arestas com as disntacias entre os pares de pontos unicos
+  /* Preenche as arestas com as disntacias entre os pares de pontos unicos */
   preencheVetorArestas(arestas, qtdPontos, pontos);
-  // Ordena o vetor de arestas
-  qsort(arestas, qtdArestas, sizeof(Aresta*), compareArestas); 
+  qsort(arestas, qtdArestas, sizeof(Aresta*), compareArestas); // Ordena o vetor de arestas
 
   /*======== Aplicando o algoritmo ========*/
   int qtdGrupos = atoi(argv[2]);
@@ -39,9 +38,8 @@ int main(int argc, char** argv) {
     printf("O número de grupos não pode ser maior que a quantidade de pontos!\n");
     exit(1);
   }
-
   UnionTree* componentesConexas = inicializaUnionTree(qtdPontos);
-  //utiliza o problema de union-find para conectar os pontos em grupos
+  /* Utiliza o problema de union-find para conectar os pontos em grupos */
   conectaArestas(arestas, componentesConexas, qtdPontos, qtdArestas, qtdGrupos);
 
   /*======== Criando os grupos de pontos ========*/
