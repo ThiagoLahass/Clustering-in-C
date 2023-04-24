@@ -68,7 +68,7 @@ Ponto* getPonto2(Aresta *a) { return a->p2; }
 
 double getDistancia(Aresta *a) { return a->distancia; }
 
-void conectaArestas(Aresta** arestas, UnionTree* t, int qtdPontos, int qtdArestas, int k){
+void conectaArestas(Aresta** arestas, UnionTree* t, int qtdPontos, int qtdArestas, int k) {
   register int i = 0;
   register Ponto* p1, *p2;
   int numConexoes = qtdPontos - k;

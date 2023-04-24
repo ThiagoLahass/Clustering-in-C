@@ -31,7 +31,7 @@ Grupo *inicializaGrupo( int qtdPontosGrupo, int idGrupo) {
   return g;
 }
 
-Grupo** inicializaVetorGrupos( int qtdGrupos, int qtdPontos, UnionTree* t, Ponto** pontos ) {
+Grupo** inicializaVetorGrupos(int qtdGrupos, int qtdPontos, UnionTree* t, Ponto** pontos) {
   int idsGrupos[qtdGrupos]; // Vetor para salvar os ids unicos encontrados
   int qtdPontosGrupo[qtdGrupos]; // Vetor para salvar a quantidade de pontos de cada grupo
   int contador = 0; // Contador para acompanhar o número de ids únicos encontrados
@@ -47,8 +47,9 @@ Grupo** inicializaVetorGrupos( int qtdGrupos, int qtdPontos, UnionTree* t, Ponto
     int valorAtual = getIdIndexUnionTree(t, pontos[i]);
     int idJaAdicionado = 0; // Flag para verificar se o valor já foi adicionado ao novo vetor
 
-    // Verifica se o valor já foi adicionado ao novo vetor
-    for (int j = 0; j < contador; j++) {
+    /* Verifica se o valor já foi adicionado ao novo vetor */
+    int j = 0;
+    for (j = 0; j < contador; j++) {
       if (idsGrupos[j] == valorAtual) {
         qtdPontosGrupo[j] ++;
         idJaAdicionado = 1;
@@ -56,7 +57,7 @@ Grupo** inicializaVetorGrupos( int qtdGrupos, int qtdPontos, UnionTree* t, Ponto
       }
     }
 
-    // Se o valor ainda não foi adicionado ao novo vetor, adiciona-o
+    /* Se o valor ainda não foi adicionado ao novo vetor, adiciona-o */
     if (!idJaAdicionado) {
       idsGrupos[contador] = valorAtual;
       qtdPontosGrupo[contador] ++;
