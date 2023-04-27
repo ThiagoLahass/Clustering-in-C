@@ -32,7 +32,6 @@ Aresta** inicializaVetorArestas(int qtdArestas){
 void preencheVetorArestas(Aresta** arestas, int qtdPontos, Ponto** pontos){
   register int i = 0, j = 0, idx = 0;
   register double distAtual;
-  
 
   for (i = 0; i < qtdPontos; i++) {
     for (j = 0; j < qtdPontos; j++) {
