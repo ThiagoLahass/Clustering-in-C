@@ -107,7 +107,7 @@ void imprimeGrupo(Grupo *g, FILE* arquivoSaida) {
   int i = 0;
   for (i = 0; i < g->qtdPontos; i++) {
     imprimePonto(g->pontos[i], arquivoSaida);
-    if (i < g->qtdPontos - 1) { fprintf(arquivoSaida, ", "); }
+    if (i < g->qtdPontos - 1) { fprintf(arquivoSaida, ","); }
   }  
 }
 
@@ -115,7 +115,7 @@ void imprimeGrupos(Grupo**  grupos, int qtdGrupos, FILE* arquivoSaida) {
   int i = 0;
   for(i = 0; i < qtdGrupos; i++){
     imprimeGrupo(grupos[i], arquivoSaida);
-    if( i < qtdGrupos - 1) { fprintf(arquivoSaida, "\n"); }
+    fprintf(arquivoSaida, "\n");
   }
 }
 
