@@ -14,9 +14,15 @@ DIR_SAIDA_3=./out/3.txt
 DIR_SAIDA_4=./out/4.txt
 DIR_SAIDA_5=./out/5.txt
 
+DIR_RESP_1=./resp/1.txt
+DIR_RESP_2=./resp/2.txt
+DIR_RESP_3=./resp/3.txt
+DIR_RESP_4=./resp/4.txt
+DIR_RESP_5=./resp/5.txt
+
 QTD_GRUPOS=3 # Caso de teste qualquer
 
-all: clean compile runAll valAll
+all: clean compile runAll diffAll # valAll
 
 compile: ponto aresta union grupo
 	@ gcc -o trab1 *.o main.c -lm 
@@ -79,6 +85,28 @@ val5: clean compile
 	@ valgrind --leak-check=full ./trab1 ${DIR_ENTRADA_5} 10 ${DIR_SAIDA_5}
 
 valAll: val1 val2 val3 val4 val5
+
+diff1: clean compile
+	@ ./trab1 ${DIR_ENTRADA_1} 2 ${DIR_SAIDA_1}
+	@ diff ${DIR_SAIDA_1} ${DIR_RESP_1}
+
+diff2: clean compile
+	@ ./trab1 ${DIR_ENTRADA_2} 4 ${DIR_SAIDA_2}
+	diff ${DIR_SAIDA_2} ${DIR_RESP_2}
+
+diff3: clean compile
+	@ ./trab1 ${DIR_ENTRADA_3} 5 ${DIR_SAIDA_3}
+	diff ${DIR_SAIDA_3} ${DIR_RESP_3}
+
+diff4: clean compile
+	@ ./trab1 ${DIR_ENTRADA_4} 5 ${DIR_SAIDA_4}
+	diff ${DIR_SAIDA_4} ${DIR_RESP_4}
+
+diff5: clean compile
+	@ ./trab1 ${DIR_ENTRADA_5} 10 ${DIR_SAIDA_5}
+	diff ${DIR_SAIDA_5} ${DIR_RESP_5}
+
+diffAll: diff1 diff2 diff3 diff4 diff5
 
 clean:
 	@ rm -f *.o trab1 out/*
