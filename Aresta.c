@@ -80,7 +80,7 @@ void conectaArestas(Aresta** arestas, UnionTree* t, int qtdPontos, int qtdAresta
     p2 = getPonto2(arestas[i]);
 
     if (UF_find(t,p1) != UF_find(t, p2)) { // Se os pontos não estiverem conectados,
-      UF_union(t, getPonto1(arestas[i]), getPonto2(arestas[i])); // Conecte-os
+      UF_union(t, p1, p2); // Conecte-os
       numConexoesAtual++;
     }
 
