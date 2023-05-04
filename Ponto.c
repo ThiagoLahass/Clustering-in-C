@@ -7,9 +7,7 @@ struct ponto {
     int id; // Onde vai ser aplicado o algoritmo
 };
 
-/// @brief Obtém os pontos de um arquivo de entrada
-/// @param nomeArquivoEntrada 
-/// @return Vetor com todos os pontos do arquivo
+
 Ponto** lePontos(char* nomeArquivoEntrada) {
     FILE* arquivoDeEntrada = fopen(nomeArquivoEntrada, "r");
     if (arquivoDeEntrada == NULL) {
@@ -62,11 +60,6 @@ Ponto** lePontos(char* nomeArquivoEntrada) {
     return pontos;
 }
 
-/// @brief Dadas as informações de um ponto, aloca-o dinamicamente
-/// @param linha 
-/// @param qtdDimensoes número de dimensões do ponto
-/// @param identificadorPonto id para individualizar o ponto
-/// @return Ponteiro para a estrutura criada
 Ponto* inicializaPonto(char* linha, int qtdDimensoes, int identificadorPonto) {
     Ponto* ponto = (Ponto*) malloc(sizeof(Ponto));
     ponto->coordenadas = (double*) malloc(sizeof(double) * qtdDimensoes);
@@ -93,16 +86,12 @@ Ponto* inicializaPonto(char* linha, int qtdDimensoes, int identificadorPonto) {
 
 void imprimePonto(Ponto* p, FILE* arquivoSaida) { fprintf(arquivoSaida, "%s", p->nome); }
 
-/// @brief Liberação de memória de um ponto
-/// @param p 
 void destroiPonto(Ponto* p) {
     free(p->nome);
     free(p->coordenadas);
     free(p);
 }
 
-/// @brief Liberação de memória de um vetor de pontos
-/// @param pontos 
 void destroiPontos(Ponto **pontos) {
     int i = 0;
     while (pontos[i] != NULL) {
@@ -114,10 +103,6 @@ void destroiPontos(Ponto **pontos) {
     free(pontos);
 }
 
-/// @brief Dados dois pontos, calcula a distância euclidiana entre eles
-/// @param x 
-/// @param y 
-/// @return distancia entre os pontos
 double calculaDistanciaEntrePontos(Ponto* x, Ponto* y) {
     double dist = 0.0;
     int i = 0;

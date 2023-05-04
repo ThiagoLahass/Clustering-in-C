@@ -21,10 +21,6 @@ int compareGrupos(const void* arg1, const void* arg2) {
   return strcmp(getNome(g1->pontos[0]), getNome(g2->pontos[0]));
 }
 
-/// @brief Inicializa um grupo dinamicamente
-/// @param qtdPontosGrupo Número de pontos do grupo
-/// @param idGrupo Identificador do grupo
-/// @return Ponteiro para a estrutura alocada
 Grupo *inicializaGrupo( int qtdPontosGrupo, int idGrupo) {
   Grupo *g = (Grupo*) malloc(sizeof(Grupo));
   Ponto** ps = (Ponto**) calloc( qtdPontosGrupo, sizeof(Ponto*));
@@ -35,12 +31,6 @@ Grupo *inicializaGrupo( int qtdPontosGrupo, int idGrupo) {
   return g;
 }
 
-/// @brief Inicializa um vetor de grupos dinamicamente
-/// @param qtdGrupos Quantia de grupos
-/// @param qtdPontos Quantia de pontos
-/// @param t Estrutura com a informação das conexões de pontos
-/// @param pontos Conjunto de pontos
-/// @return Ponteiro para o início do vetor
 Grupo** inicializaVetorGrupos(int qtdGrupos, int qtdPontos, UnionTree* t, Ponto** pontos) {
   int idsGrupos[qtdGrupos]; // Vetor para salvar os ids unicos encontrados
   int qtdPontosGrupo[qtdGrupos]; // Vetor para salvar a quantidade de pontos de cada grupo
@@ -97,24 +87,16 @@ void preencheVetorGrupos(Grupo**grupos, int qtdGrupos, UnionTree* t, Ponto** pon
   }
 }
 
-/// @brief Adiciona um ponto a um grupo
-/// @param g 
-/// @param p 
 void addPontoGrupo(Grupo* g, Ponto* p) {
   g->pontos[g->qtdPontosAtual] = p;
   g->qtdPontosAtual++;
 }
 
-/// @brief Liberação de memória de um grupo
-/// @param g 
 void destroiGrupo(Grupo *g) {
   free(g->pontos);
   free(g);
 }
 
-/// @brief Liberação de memória de um vetor de grupos
-/// @param grupos 
-/// @param qtdGrupos 
 void destroiGrupos(Grupo **grupos, int qtdGrupos) {
   int i = 0;
   for (i = 0; i < qtdGrupos; i++) { destroiGrupo(grupos[i]); }
@@ -122,15 +104,10 @@ void destroiGrupos(Grupo **grupos, int qtdGrupos) {
 }
 
 
-/// @brief Realiza a ordenação dos pontos de um grupo (QuickSort)
-/// @param g 
 void ordenaPontosDoGrupo(Grupo *g) {
   qsort(g->pontos, g->qtdPontos, sizeof(Ponto*), comparePontos);
 }
 
-/// @brief Realiza a ordenação dos grupos (QuickSort)
-/// @param grupos 
-/// @param qtdGrupos 
 void ordenaTodosGrupos(Grupo** grupos, int qtdGrupos) {
   int i = 0;
   for (i = 0; i < qtdGrupos; i++) { 
