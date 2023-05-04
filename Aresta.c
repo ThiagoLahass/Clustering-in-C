@@ -62,14 +62,6 @@ void preencheVetorArestas(Aresta** arestas, int qtdPontos, Ponto** pontos){
   }
 }
 
-void imprimeVetorArestas(Aresta** a, int qtdArestas){
-  register int i = 0;
-  for (i = 0; i< qtdArestas; i++) {
-    printf("%.2f -> ", getDistancia(a[i]));
-    printf("%d - %d\n", getId(getPonto1(a[i])), getId(getPonto2(a[i])));
-  }
-}
-
 /// @brief liberação de memória do vetor de arestas
 /// @param a 
 /// @param qtdArestas 

@@ -93,19 +93,6 @@ Ponto* inicializaPonto(char* linha, int qtdDimensoes, int identificadorPonto) {
 
 void imprimePonto(Ponto* p, FILE* arquivoSaida) { fprintf(arquivoSaida, "%s", p->nome); }
 
-void imprimePontos(Ponto **pontos, FILE* arquivoSaida) {
-  int i = 0;
-  while (pontos[i] != NULL) {
-    fprintf(arquivoSaida, "%s", pontos[i]->nome);
-    int j = 0;
-    for (j = 0; j < pontos[i]->qtdDimensoes; j++) {
-      fprintf(arquivoSaida, ",%.20lf", pontos[i]->coordenadas[j]);
-    }
-    fprintf(arquivoSaida, "\n");
-    i++;
-  }
-}
-
 /// @brief Liberação de memória de um ponto
 /// @param p 
 void destroiPonto(Ponto* p) {

@@ -14,7 +14,6 @@ typedef struct ponto Ponto;
 Ponto** lePontos(char* nomeArquivoEntrada);
 Ponto* inicializaPonto(char* linha, int qtdDimensoes, int identificadorPonto);
 void imprimePonto(Ponto* p, FILE* arquivoSaida);
-void imprimePontos(Ponto **pontos, FILE* arquivoSaida);
 void destroiPonto(Ponto* p);
 void destroiPontos(Ponto** pontos);
 double calculaDistanciaEntrePontos(Ponto* x, Ponto* y);

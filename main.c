@@ -28,6 +28,7 @@ int main(int argc, char** argv) {
 
   /* Aresta: conexão entre dois pontos */
   Aresta** arestas = inicializaVetorArestas(qtdArestas); 
+
   /* Preenche as arestas com as disntacias entre os pares de pontos unicos */
   preencheVetorArestas(arestas, qtdPontos, pontos);
   qsort(arestas, qtdArestas, sizeof(Aresta*), compareArestas); // Ordena o vetor de arestas
@@ -53,6 +54,7 @@ int main(int argc, char** argv) {
     printf("Erro ao abrir o arquivo %s\n", argv[3]);
     exit(1);
   }
+  
   imprimeGrupos(gruposPontos, qtdGrupos, arquivoDeSaida);
   fclose(arquivoDeSaida);
 

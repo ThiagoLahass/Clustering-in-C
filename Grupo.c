@@ -89,7 +89,7 @@ void preencheVetorGrupos(Grupo**grupos, int qtdGrupos, UnionTree* t, Ponto** pon
   for (i = 0; i < qtdPontos; i++ ) {
     for (j = 0; j < qtdGrupos; j++ ) {
       // Verifica se o ponto pertence ao grupo
-      if (getIdIndexUnionTree(t, pontos[i]) == getIdGrupo(grupos[j])) {
+      if (UF_find(t, pontos[i]) == getIdGrupo(grupos[j])) {
         addPontoGrupo(grupos[j], pontos[i]);
         break;
       }

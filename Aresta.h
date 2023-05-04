@@ -10,7 +10,6 @@ int compareArestas(const void* arg1, const void* arg2);
 Aresta* inicializaAresta(Ponto* p1, Ponto* p2, double distancia);
 Aresta** inicializaVetorArestas(int tamanho);
 void preencheVetorArestas(Aresta** arestas, int qtdPontos, Ponto** pontos);
-void imprimeVetorArestas(Aresta** a, int tamanho);
 void destroiVetorArestas(Aresta** a, int tamanho);
 void destroiAresta(Aresta* a);
 Ponto* getPonto1(Aresta* a);

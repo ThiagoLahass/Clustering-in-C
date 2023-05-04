@@ -55,14 +55,6 @@ int UF_find(UnionTree* t,Ponto* p) {
     return componente;  
 }
 
-void imprimeUnionTree(UnionTree* t, Ponto** pontos,int tamanho) {
-    register int i = 0, contador = 0;
-    for (i = 0; i < tamanho; i++) {
-        printf("%d -> %s\n", UF_find(t, pontos[i]), getNome(pontos[i]));
-        contador++;
-    }
-}
-
 /// @brief liberação de memória da estrutura
 /// @param t 
 void destroiUnionTree(UnionTree* t){
