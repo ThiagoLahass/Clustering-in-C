@@ -5,6 +5,9 @@ struct unionTree {
     int* size;
 };
 
+/// @brief aloca dinamicamente uma unionTree
+/// @param tamanho quantos pontos devem ser armazenados
+/// @return ponteiro para a estrutura
 UnionTree* inicializaUnionTree(int tamanho) {
     register int i = 0;
     UnionTree* t = malloc(sizeof(UnionTree));
@@ -18,7 +21,11 @@ UnionTree* inicializaUnionTree(int tamanho) {
     return t;
 }
 
-/* Wheigted quick union */
+
+/// @brief conexão de dois pontos - utiliza o wheigted quickUnion com path compression
+/// @param t 
+/// @param a ponto 1
+/// @param b ponto 2
 void UF_union(UnionTree* t, Ponto* a, Ponto* b) {
     int i = UF_find(t, a);
     int j = UF_find(t, b);
@@ -34,7 +41,11 @@ void UF_union(UnionTree* t, Ponto* a, Ponto* b) {
     }
 }
 
-/* Quick union com compressão de caminho */
+
+/// @brief obtem a componente conexa de um ponto
+/// @param t 
+/// @param p ponto
+/// @return inteiro que identifica a componente conexa
 int UF_find(UnionTree* t,Ponto* p) {
     int componente = getId(p);
     while (componente != t->tree[componente]){
@@ -44,8 +55,6 @@ int UF_find(UnionTree* t,Ponto* p) {
     return componente;  
 }
 
-int getIdIndexUnionTree( UnionTree* t, Ponto* p) { return UF_find(t, p); }
-
 void imprimeUnionTree(UnionTree* t, Ponto** pontos,int tamanho) {
     register int i = 0, contador = 0;
     for (i = 0; i < tamanho; i++) {
@@ -54,6 +63,8 @@ void imprimeUnionTree(UnionTree* t, Ponto** pontos,int tamanho) {
     }
 }
 
+/// @brief liberação de memória da estrutura
+/// @param t 
 void destroiUnionTree(UnionTree* t){
     free(t->size);
     free(t->tree);
